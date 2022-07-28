@@ -1,8 +1,19 @@
 package application;
 
 import chess.ChessPiece;
+import chess.enums.Color;
 
 public class UI {
+    
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
     
     public static void printBoard(ChessPiece[][] pieces) {
         System.out.println();
@@ -15,13 +26,14 @@ public class UI {
         }
         System.out.println("  a b c d e f g h");
     }
-
+    
     private static void printPiece(ChessPiece piece){
         if(piece == null){
-            System.out.print("-");
+            System.out.print(ANSI_BLACK + "-" + ANSI_RESET);
         }
         else {
-            System.out.print(piece);
+            if(piece.getColor() == Color.BLACK) System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
+            else System.out.print(piece);
         }
         System.out.print(" ");
     }
