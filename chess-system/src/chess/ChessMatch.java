@@ -4,12 +4,8 @@ import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
 import chess.enums.Color;
-import chess.pieces.Bishop;
-import chess.pieces.King;
-import chess.pieces.Knight;
-import chess.pieces.Pawn;
-import chess.pieces.Queen;
-import chess.pieces.Rook;
+import chess.pieces.*;
+
 
 
 public class ChessMatch {
@@ -44,6 +40,9 @@ public class ChessMatch {
         if(!board.thereIsAPiece(position)){
             throw new ChessException("There is no piece on source position");
         }
+        if(!board.piece(position).isThereAnyPossibleMove()){
+            throw new ChessException("There is no possible move for the chosen piece");
+        }
     }
 
     private Piece makeMove(Position source, Position target){
@@ -61,29 +60,29 @@ public class ChessMatch {
 
         //PEÇAS PRETAS:
         placeNewPiece('a', 8, new Rook(board, Color.BLACK));
-        placeNewPiece('b', 8, new Knight(board, Color.BLACK));
-        placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
-        placeNewPiece('d', 8, new Queen(board, Color.BLACK));
+        // placeNewPiece('b', 8, new Knight(board, Color.BLACK));
+        // placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
+        // placeNewPiece('d', 8, new Queen(board, Color.BLACK));
         placeNewPiece('e', 8, new King(board, Color.BLACK));
-        placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
-        placeNewPiece('g', 8, new Knight(board, Color.BLACK));
+        // placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
+        // placeNewPiece('g', 8, new Knight(board, Color.BLACK));
         placeNewPiece('h', 8, new Rook(board, Color.BLACK));
-        for(char column = 'a'; column < 'i'; column++){
-            placeNewPiece(column, 7, new Pawn(board, Color.BLACK));
-        }
+        // for(char column = 'a'; column < 'i'; column++){
+        //     placeNewPiece(column, 7, new Pawn(board, Color.BLACK));
+        // }
 
         //PEÇAS BRANCAS:
         placeNewPiece('a', 1, new Rook(board, Color.WHITE));
-        placeNewPiece('b', 1, new Knight(board, Color.WHITE));
-        placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
-        placeNewPiece('d', 1, new Queen(board, Color.WHITE));
+        // placeNewPiece('b', 1, new Knight(board, Color.WHITE));
+        // placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
+        // placeNewPiece('d', 1, new Queen(board, Color.WHITE));
         placeNewPiece('e', 1, new King(board, Color.WHITE));
-        placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
-        placeNewPiece('g', 1, new Knight(board, Color.WHITE));
+        // placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
+        // placeNewPiece('g', 1, new Knight(board, Color.WHITE));
         placeNewPiece('h', 1, new Rook(board, Color.WHITE));
-        for(char column = 'a'; column < 'i'; column++){
-            placeNewPiece(column, 2, new Pawn(board, Color.WHITE));
-        }
+        // for(char column = 'a'; column < 'i'; column++){
+        //     placeNewPiece(column, 2, new Pawn(board, Color.WHITE));
+        // }
 
     }
 }
