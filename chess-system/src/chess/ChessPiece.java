@@ -1,7 +1,7 @@
 package chess;
 
 import boardgame.Board;
-import boardgame.BoardException;
+
 import boardgame.Piece;
 import boardgame.Position;
 import chess.enums.Color;
@@ -20,7 +20,7 @@ public abstract class ChessPiece extends Piece{
     
     protected boolean isThereOpponentPiece(Position position){
         
-        if(!getBoard().positionExists(position)){
+        if(!getBoard().positionExists(position.getRow(), position.getColumn())){
             return false;
         }
 
