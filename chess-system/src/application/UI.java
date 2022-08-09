@@ -22,15 +22,15 @@ public class UI {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-
+    
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
-	public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-	public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
-	public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-	public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
-	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
-	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
     
     public static ChessPosition readChessPosition (Scanner sc){
         try {
@@ -43,16 +43,22 @@ public class UI {
             throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
         }
     }
-
+    
     public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured){
         printBoard(chessMatch.getPieces());
         System.out.println();
         printCapturedPieces(captured);
         System.out.println();
         System.out.println("Turn: " + chessMatch.getTurn());
-        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-        if(chessMatch.getCheck()){
-            System.out.println(ANSI_RED + "CHECK!" + ANSI_RESET);
+        if(chessMatch.getCheckMate()){
+            System.out.println(ANSI_RED + "CHECKMATE!" + ANSI_RESET);
+            System.out.println("Winner:" + chessMatch.getCurrentPlayer());
+        }
+        else{
+            System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+            if(chessMatch.getCheck()){
+                System.out.println(ANSI_RED + "CHECK!" + ANSI_RESET);
+            }
         }
     }
     
@@ -68,7 +74,7 @@ public class UI {
         }
         System.out.println("  a b c d e f g h");
     }
-
+    
     public static void printBoard(ChessPiece[][] pieces, boolean[][]possibleMoves) {
         clearScreen();
         System.out.println();
@@ -95,16 +101,16 @@ public class UI {
         }
         System.out.print(" ");
     }
-
+    
     public static void clearScreen() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
     }
-
+    
     private static void printCapturedPieces(List<ChessPiece> captured){
         List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
         List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
-
+        
         System.out.println("Captured pieces:");
         System.out.println("White: ");
         System.out.print(ANSI_WHITE);
