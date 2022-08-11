@@ -97,7 +97,7 @@ public class UI {
         }
         else {
             if(piece.getColor() == Color.BLACK) System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
-            else System.out.print(piece);
+            else System.out.print(piece + ANSI_RESET);
         }
         System.out.print(" ");
     }
