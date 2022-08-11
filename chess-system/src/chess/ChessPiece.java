@@ -43,4 +43,15 @@ public abstract class ChessPiece extends Piece{
         
         
     }
+    protected boolean isThereFriendlyPiece(Position position){
+        
+        if(!getBoard().positionExists(position.getRow(), position.getColumn())){
+            return false;
+        }
+
+        ChessPiece p = (ChessPiece)getBoard().piece(position);
+        return p!=null && p.getColor() == this.color;
+        
+        
+    }
 }
